@@ -1,37 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_params.c                                  :+:      :+:    :+:   */
+/*   ft_check_row.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfrederi <lfrederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 13:10:53 by lfrederi          #+#    #+#             */
-/*   Updated: 2021/10/23 18:56:17 by lfrederi         ###   ########.fr       */
+/*   Created: 2021/10/23 17:09:44 by lfrederi          #+#    #+#             */
+/*   Updated: 2021/10/23 17:54:45 by lfrederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_number(char c)
+#include <stdio.h>
+
+int	ft_check_row(int t[4], int view)
 {
-	if (c >= '1' && c <= '4')
-		return (1);
-	return (0);
+	int	v_l;
+	int	i;
+	int tmp;
+
+	v_l = 1;
+	i = 0;
+	tmp = t[i];
+	i++;
+	while (i < 4)
+	{
+		printf("i = %d / t[i] = %d / v_l = %d\n", i, t[i], v_l);
+		if (tmp < t[i])
+		{
+			v_l++;
+			tmp = t[i];
+		}
+		i++;
+	}
+	
+	return (view == v_l);
 }
 
-int	ft_check_params(char *param)
-{
-	int	i;
 
-	i = 0;
-	while (param[i])
-	{
-		if ((ft_number(param[i]) == 1 && (i % 2 == 0))
-			|| ((param[i] == ' ') && (i % 2 == 1)))
-			i++;
-		else
-			return (0);
-	}
-	if (i == 31)
-		return (1);
-	else
-		return (0);
+int main()
+{
+	int t[4] = {1, 4, 3, 2};
+	printf("%d\n", ft_check_row(t, 4));
+
+	return (0);
 }
